@@ -1,0 +1,415 @@
+#!/bin/csh
+#################################################################
+###
+###   This shell scrip use to download ECMWF 40-year Reanalysis
+###   Pressure and Surface levels datasets
+###
+###   Yin-Min, Cho (2005-07-07)
+###
+#################################################################
+#################################################################
+#   iop == 0  for reading pressure level datasets
+#          1  for reading surface  level datasets
+#################################################################
+
+ set iop = 0
+
+#################################################################
+#   mac == 0  for DEC machine , mac == 1  for LINUX machine
+#################################################################
+
+ set mac = 1
+
+#################################################################
+#   inp == 0  for input monthly data
+#       == 6  for input 6 hours data
+#################################################################
+
+ set inp = 6
+
+ if ( $inp == 0 )  set csi = 'mon'
+ if ( $inp != 0 )  set csi = '6hr'
+
+#################################################################
+#   cas == 0  for output monthly mean
+#       == 1  for output daily mean
+#       == 5  for output pentad mean
+#################################################################
+
+ set cas = 5
+
+#################################################################
+#   Set output data time
+#
+#   isy == output data of start year
+#   iey == output data of  end  year
+#   ist == output data of start time step 
+#   iet == output data of  end  time step 
+#       ex :  cas == 0 for ist = 1 & iet = 12
+#                 == 1 for ist = 1 & iet = 365 or 366
+#                 == 5 for ist = 1 & iet = 73
+#################################################################
+
+ set isy = 1990
+ set iey = 1990
+ set ist =    1
+ set iet =   73
+
+#################################################################
+#   Set output data directory
+#
+#   dir  = output data directory 
+#   ndir = the number of dir's words 
+#################################################################
+
+ set dir = '/nina2/ylchen/DATA_old/ERA40/pro/'
+#set dir = '/nina2/ylchen/DATA/ERA40/out/sfc/'
+ set ndir = 33
+
+#################################################################
+#################################################################
+#   Process Pressure Level Datasets
+#################################################################
+#################################################################
+#  Spatial resolution
+#    144 X 73 ( 2.5 deg lon. x 2.5 deg lat. )
+#################################################################
+
+ if ( $iop == 0 ) then
+
+ f77 read-era40-grb-prs.f -o runprs
+
+#################################################################
+#  Pressure level variable index
+#
+#    10*  Geopotential (orography at surface) [m**2/s**2] ==> [m]
+#    11*  Temperature [K] ==> [C]
+#    12   U-Velocity [m/s]
+#    13   V-Velocity [m/s]
+#    14*  Specific Humidity [kg/kg] ==> [10e+3]
+#    15   Vertical Velocity [Pa/s]
+#    20*  Potential Voticity [K*m**2/kg*s] ==> [10e+6]
+#    21   Relative Humidity [%]
+#    22*  Ozone Mass Mixing Ratio [kg/kg] ==> [10e+6]
+#    30*  Vorticity (relative) [1/s] ==> [10e+6]
+#    31*  Divergence [1/s] ==> [10e+6]
+#################################################################
+
+#foreach nvar ( 10 11 12 13 14 15 20 21 22 30 31 )
+#foreach nvar ( 10 11 12 13 14 15 21 30 31 )
+ foreach nvar ( 12 )
+
+ if ( $nvar == 10 )  set var = 'Z'
+ if ( $nvar == 11 )  set var = 'T'
+ if ( $nvar == 12 )  set var = 'U'
+ if ( $nvar == 13 )  set var = 'V'
+ if ( $nvar == 14 )  set var = 'Q'
+ if ( $nvar == 15 )  set var = 'W'
+ if ( $nvar == 20 )  set var = 'PV'
+ if ( $nvar == 21 )  set var = 'RH'
+ if ( $nvar == 22 )  set var = 'O3'
+ if ( $nvar == 30 )  set var = 'VOR'
+ if ( $nvar == 31 )  set var = 'DIV'
+
+#################################################################
+#  Pressure level index
+#
+#  23 levels ==>
+#       1   2   3   5   7  10  20  30  50  70
+#     100 150 200 250 300 400 500 600 700 775 850 925 1000
+#     999 for all levels
+#################################################################
+
+#foreach lev ( 100 150 200 250 300 400 500 600 700 775 850 925 1000 )
+#foreach lev ( 100 200 300 400 500 600 700 850 925 1000 )
+#foreach lev ( 200 850 )
+ foreach lev ( 200 )
+
+#################################################################
+
+ set yy = $isy
+
+ while ( $yy <= $iey )
+
+ foreach mm ( 01 02 03 04 05 06 07 08 09 10 11 12 )
+
+ set ifn = '/dbase1/ERA40/PRS/PRS_'$yy'/ERA40_PRS_'$var'_'$yy'_'$mm'_'$csi'.grb'
+
+#################################################################
+
+ echo $yy $mm $var $lev
+
+ set ofn = $dir'ERA40_'$var'_'$lev'hPa_'$yy'_'$csi'.grb'
+ set tfn = $dir'ERA40_'$var'_'$lev'hPa_'$yy$mm'.tmp'
+
+#################################################################
+
+ if ( $lev == 999 ) then
+
+ cat $ifn >> $ofn
+
+ else
+
+ wgrib -s $ifn | egrep ":"$lev" mb:" | wgrib -i -grib $ifn -o $tfn
+
+ cat $tfn >> $ofn
+
+ rm -rf $tfn
+
+ endif
+
+#################################################################
+
+ end
+
+ wgrib $ofn | wgrib -i -nh $ofn -o $ofn:r.bin
+
+ rm -rf $ofn
+
+@ yy = $yy + 1
+
+ end
+
+#################################################################
+
+ cd $dir
+ mkdir $var
+ cd $dir$var
+ mkdir $lev'hPa'
+ cd /nina2/ylchen/ERA40/temp
+
+#################################################################
+
+runprs << EOF
+$dir
+$ndir
+$mac
+$nvar
+$lev
+$isy
+$iey
+$inp
+$cas
+$ist
+$iet
+EOF
+
+#################################################################
+
+ end
+ end
+
+\rm -rf runprs
+ cd $dir
+\rm -rf ERA40_*.bin
+
+ endif
+
+#################################################################
+#################################################################
+#   Process Surface Level Datasets
+#################################################################
+#################################################################
+#  Spatial resolution
+#    144 X 73 ( 2.5 deg lon. x 2.5 deg lat. )
+#################################################################
+
+ if ( $iop != 0 ) then
+
+ f77 read-era40-grb-sfc.f -o runsfc
+
+#################################################################
+#  Surface level variable index
+#
+#    10*  Evaporation (accumulate) [m] ==> [mm/day]
+#    20*  2 meter Temperature [K] ==> [C]
+#    21*  2 metre Dewpoint Temperature [K] ==> [C]
+#    22*  Convective Precipitation (accumulate) [m of water] ==> [mm/day]
+#    23*  Snow Depth [m of water equivalent] ==> [kg/m**2]
+#    24*  Snowfall (convective + stratiform) (accumulate) [m of water equivalent] ==> [mm/day]
+#    25*  Runoff (accumulate) [m of water] ==> [mm/day]
+#    30   10 metre U Wind Component [m/s]
+#    31   10 metre V Wind Component [m/s]
+#    32   Total Column Water (liquid + ice + vapour) [kg/m**2]
+#    33*  Large-Scale Precipitation (Stratiform Precipitation) (accumulate) [m of water] ==> [mm/day]
+#    34*  Mean Sea Level Pressure [Pa] ==> [hPa]
+#    35   Boundary Layer Height  [m]
+#    36*  Surface Solar Radiation (accumulate) [W*s/m**2] ==> [W/m**2]
+#    37*  Surface Thermal Radiation (accumulate) [W*s/m**2] ==> [W/m**2]
+#    38*  Top Solar Radiation (accumulate) [W*s/m**2] ==> [W/m**2]
+#    39*  Top Thermal Radiation (accumulate) [W*s/m**2] ==> [-W/m**2]
+#    40   Total Cloud Cover [0-1]
+#    41   Low Cloud Cover [0-1]
+#    42   Medium Cloud Cover [0-1]
+#    43   High Cloud Cover [0-1]
+#    44*  Temperature of Snow Layer [K] ==> [C]
+#    50   Total Column Water Vapor [kg/m**2]
+#    51*  Total Column Ozone [kg/m**2] ==> [Dobsons]
+#    52*  Surface Sensible Heat Flux (accumulate) [W*s/m**2] ==> [-W/m**2]
+#    53*  Surface Latent Heat Flux (accumulate) [W*s/m**2] ==> [-W/m**2]
+#    54*  Surface Solar Radiation Downwards (accumulate) [W*s/m**2] ==> [W/m**2]
+#    55*  Surface Thermal Radiation Downwards (accumulate) [W*s/m**2] ==> [W/m**2]
+#    56*  East/West Surface Stress (accumulate) [N*s/m**2] ==> [N/m**2]
+#    57*  North/South Surface Stress (accumulate) [N*s/m**2] ==> [N/m**2]
+#    58*  Latitudinal Component of Gravity Wave Stress (accumulate) [N*s/m**2] ==> [N/m**2]
+#    59*  Meridional Component of Gravity Wave Stress (accumulate) [N*s/m**2] ==> [N/m**2]
+#    60*  Top Net Solar Radiation, Clear Sky (accumulate) [W*s/m**2] ==> [W/m**2]
+#    61*  Top Net Thermal Radiation, Clear Sky (accumulate) [W*s/m**2] ==> [W/m**2]
+#    62*  Surface Net Solar Radiation, Clear Sky (accumulate) [W*s/m**2] ==> [W/m**2]
+#    63*  Surface Net Thermal Radiation, Clear Sky (accumulate) [W*s/m**2] ==> [W/m**2]
+#    64*  Soil Temperature Level 1 [K] ==> [C]
+#    65*  Soil Temperature Level 2 [K] ==> [C]
+#    66*  Soil Temperature Level 3 [K] ==> [C]
+#    67*  Soil Temperature Level 4 [K] ==> [C]
+#################################################################
+
+#foreach nvar ( 10 20 21 22 23 24 25 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44                                           50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 )
+ foreach nvar ( 20 21 34 )
+
+ if ( $nvar == 10 )  set var = 'E'
+ if ( $nvar == 20 )  set var = '2T'
+ if ( $nvar == 21 )  set var = '2D'
+ if ( $nvar == 22 )  set var = 'CP'
+ if ( $nvar == 23 )  set var = 'SD'
+ if ( $nvar == 24 )  set var = 'SF'
+ if ( $nvar == 25 )  set var = 'RO'
+ if ( $nvar == 30 )  set var = '10U'
+ if ( $nvar == 31 )  set var = '10V'
+ if ( $nvar == 32 )  set var = 'TCW'
+ if ( $nvar == 33 )  set var = 'LSP'
+ if ( $nvar == 34 )  set var = 'MSL'
+ if ( $nvar == 35 )  set var = 'BLH'
+ if ( $nvar == 36 )  set var = 'SSR'
+ if ( $nvar == 37 )  set var = 'STR'
+ if ( $nvar == 38 )  set var = 'TSR'
+ if ( $nvar == 39 )  set var = 'TTR'
+ if ( $nvar == 40 )  set var = 'TCC'
+ if ( $nvar == 41 )  set var = 'LCC'
+ if ( $nvar == 42 )  set var = 'MCC'
+ if ( $nvar == 43 )  set var = 'HCC'
+ if ( $nvar == 44 )  set var = 'TSN'
+ if ( $nvar == 50 )  set var = 'TCWV'
+ if ( $nvar == 51 )  set var = 'TCO3'
+ if ( $nvar == 52 )  set var = 'SSHF'
+ if ( $nvar == 53 )  set var = 'SLHF'
+ if ( $nvar == 54 )  set var = 'SSRD'
+ if ( $nvar == 55 )  set var = 'STRD'
+ if ( $nvar == 56 )  set var = 'EWSS'
+ if ( $nvar == 57 )  set var = 'NSSS'
+ if ( $nvar == 58 )  set var = 'LGWS'
+ if ( $nvar == 59 )  set var = 'MGWS'
+ if ( $nvar == 60 )  set var = 'TSRC'
+ if ( $nvar == 61 )  set var = 'TTRC'
+ if ( $nvar == 62 )  set var = 'SSRC'
+ if ( $nvar == 63 )  set var = 'STRC'
+ if ( $nvar == 64 )  set var = 'STL1'
+ if ( $nvar == 65 )  set var = 'STL2'
+ if ( $nvar == 66 )  set var = 'STL3'
+ if ( $nvar == 67 )  set var = 'STL4'
+
+#################################################################
+
+ set yy = $isy
+
+ while ( $yy <= $iey )
+
+ foreach mm ( 01 02 03 04 05 06 07 08 09 10 11 12 )
+
+ set ifn = '/dbase1/ERA40/SFC/SFC_'$yy'/ERA40_SFC_'$yy'_'$mm'_'$csi'.grb'
+
+#################################################################
+
+ echo $yy $mm $var
+
+ set ofn = $dir'ERA40_'$var'_SFC_'$yy'_'$csi'.grb'
+ set tfn = $dir'ERA40_'$var'_SFC_'$yy$mm'.tmp'
+
+#################################################################
+
+ wgrib -s $ifn | egrep ":"$var":sfc:" | wgrib -i -grib $ifn -o $tfn
+
+ if ( $nvar == 35 ) then
+    wgrib -s $ifn | egrep ":v159:sfc:" | wgrib -i -grib $ifn -o $tfn 
+ endif
+ if ( $nvar == 51 ) then
+    wgrib -s $ifn | egrep ":v206:sfc:" | wgrib -i -grib $ifn -o $tfn 
+ endif
+ if ( $nvar == 54 ) then
+    wgrib -s $ifn | egrep ":v169:sfc:" | wgrib -i -grib $ifn -o $tfn 
+ endif
+ if ( $nvar == 55 ) then
+    wgrib -s $ifn | egrep ":v175:sfc:" | wgrib -i -grib $ifn -o $tfn 
+ endif
+ if ( $nvar == 60 ) then
+    wgrib -s $ifn | egrep ":v208:sfc:" | wgrib -i -grib $ifn -o $tfn 
+ endif
+ if ( $nvar == 61 ) then
+    wgrib -s $ifn | egrep ":v209:sfc:" | wgrib -i -grib $ifn -o $tfn 
+ endif
+ if ( $nvar == 62 ) then
+    wgrib -s $ifn | egrep ":v210:sfc:" | wgrib -i -grib $ifn -o $tfn 
+ endif
+ if ( $nvar == 63 ) then
+    wgrib -s $ifn | egrep ":v211:sfc:" | wgrib -i -grib $ifn -o $tfn 
+ endif
+ if ( $nvar == 64 ) then
+    wgrib -s $ifn | egrep ":STL1:0-7 cm down:" | wgrib -i -grib $ifn -o $tfn 
+ endif
+ if ( $nvar == 65 ) then
+    wgrib -s $ifn | egrep ":STL2:7-28 cm down:" | wgrib -i -grib $ifn -o $tfn 
+ endif
+ if ( $nvar == 66 ) then
+    wgrib -s $ifn | egrep ":STL3:28-100 cm down:" | wgrib -i -grib $ifn -o $tfn 
+ endif
+ if ( $nvar == 67 ) then
+    wgrib -s $ifn | egrep ":STL4:100-255 cm down:" | wgrib -i -grib $ifn -o $tfn 
+ endif
+
+#################################################################
+
+ cat $tfn >> $ofn
+
+ rm -rf $tfn
+
+#################################################################
+
+ end
+
+ wgrib $ofn | wgrib -i -nh $ofn -o $ofn:r.bin
+
+ rm -rf $ofn
+
+@ yy = $yy + 1
+
+ end
+
+#################################################################
+
+ cd $dir
+ mkdir $var
+ cd /nina2/ylchen/ERA40/temp
+
+#################################################################
+
+runsfc << EOF
+$dir
+$ndir
+$mac
+$nvar
+$isy
+$iey
+$inp
+$cas
+$ist
+$iet
+EOF
+
+#################################################################
+
+ end
+
+\rm -rf runsfc
+ cd $dir
+\rm -rf ERA40_*.bin
+
+ endif

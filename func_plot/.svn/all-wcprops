@@ -1,0 +1,227 @@
+K 25
+svn:wc:ra_dav:version-url
+V 33
+/blcnclplots/!svn/ver/2/func_plot
+END
+func_plot_mflux.ncl
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/blcnclplots/!svn/ver/2/func_plot/func_plot_mflux.ncl
+END
+func_misc.ncl
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/blcnclplots/!svn/ver/2/func_plot/func_misc.ncl
+END
+func_esg_plots.ncl
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/blcnclplots/!svn/ver/2/func_plot/func_esg_plots.ncl
+END
+func_autolevel.ncl
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/blcnclplots/!svn/ver/2/func_plot/func_autolevel.ncl
+END
+func_avginmons.ncl
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/blcnclplots/!svn/ver/2/func_plot/func_avginmons.ncl
+END
+func_affect_tw.ncl
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/blcnclplots/!svn/ver/2/func_plot/func_affect_tw.ncl
+END
+func_plot_tyenv.ncl
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/blcnclplots/!svn/ver/2/func_plot/func_plot_tyenv.ncl
+END
+func_ifisatt.ncl
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/blcnclplots/!svn/ver/2/func_plot/func_ifisatt.ncl
+END
+func_ttest.ncl
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/blcnclplots/!svn/ver/2/func_plot/func_ttest.ncl
+END
+func_ty_att.ncl
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/blcnclplots/!svn/ver/2/func_plot/func_ty_att.ncl
+END
+func_dots.ncl
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/blcnclplots/!svn/ver/2/func_plot/func_dots.ncl
+END
+func_plot_trend.ncl
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/blcnclplots/!svn/ver/2/func_plot/func_plot_trend.ncl
+END
+func_plot_sf_vp.ncl
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/blcnclplots/!svn/ver/2/func_plot/func_plot_sf_vp.ncl
+END
+func_plot_mq.ncl
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/blcnclplots/!svn/ver/2/func_plot/func_plot_mq.ncl
+END
+func_smsi.ncl
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/blcnclplots/!svn/ver/2/func_plot/func_smsi.ncl
+END
+func_plot_rhvo.ncl
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/blcnclplots/!svn/ver/2/func_plot/func_plot_rhvo.ncl
+END
+func_expdist.ncl
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/blcnclplots/!svn/ver/2/func_plot/func_expdist.ncl
+END
+func_era_mmq.ncl
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/blcnclplots/!svn/ver/2/func_plot/func_era_mmq.ncl
+END
+func_sst_vshear.ncl
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/blcnclplots/!svn/ver/2/func_plot/func_sst_vshear.ncl
+END
+func_plot_tyact.ncl
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/blcnclplots/!svn/ver/2/func_plot/func_plot_tyact.ncl
+END
+func_isnotmissing.ncl
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/blcnclplots/!svn/ver/2/func_plot/func_isnotmissing.ncl
+END
+func_global_rvke.ncl
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/blcnclplots/!svn/ver/2/func_plot/func_global_rvke.ncl
+END
+func_plot_yr_strl.ncl
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/blcnclplots/!svn/ver/2/func_plot/func_plot_yr_strl.ncl
+END
+func_plot_indexes.ncl
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/blcnclplots/!svn/ver/2/func_plot/func_plot_indexes.ncl
+END
+func_plot_traj.ncl
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/blcnclplots/!svn/ver/2/func_plot/func_plot_traj.ncl
+END
+func_plot_square.ncl
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/blcnclplots/!svn/ver/2/func_plot/func_plot_square.ncl
+END
+func_plot_global.ncl
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/blcnclplots/!svn/ver/2/func_plot/func_plot_global.ncl
+END
+func_plot_yr_onset.ncl
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/blcnclplots/!svn/ver/2/func_plot/func_plot_yr_onset.ncl
+END
+func_dailytopentad.ncl
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/blcnclplots/!svn/ver/2/func_plot/func_dailytopentad.ncl
+END
+func_plots.ncl
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/blcnclplots/!svn/ver/2/func_plot/func_plots.ncl
+END
+func_dailygpi.ncl
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/blcnclplots/!svn/ver/2/func_plot/func_dailygpi.ncl
+END
+func_dmobs.ncl
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/blcnclplots/!svn/ver/2/func_plot/func_dmobs.ncl
+END
+func_plot_gpi.ncl
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/blcnclplots/!svn/ver/2/func_plot/func_plot_gpi.ncl
+END
+func_mqgpi.ncl
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/blcnclplots/!svn/ver/2/func_plot/func_mqgpi.ncl
+END
+func_gpi.ncl
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/blcnclplots/!svn/ver/2/func_plot/func_gpi.ncl
+END
+func_plot_strm.ncl
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/blcnclplots/!svn/ver/2/func_plot/func_plot_strm.ncl
+END
+func_isrecuve.ncl
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/blcnclplots/!svn/ver/2/func_plot/func_isrecuve.ncl
+END

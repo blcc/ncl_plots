@@ -1,0 +1,20 @@
+http://www.cgd.ucar.edu/amp/amwg/diagnostics/code.html
+
+Plot Types Included:
+
+  
+    Tables of global and regional means (set 1)
+    Implied meridional ocean heat and freshwater transport (set 2)
+    Line plots of zonal means (set 3)
+    Latitude vs pressure/height zonal mean contour plots (set 4)
+    Longitude vs latitude 2D-field contour plots (set 5)
+    Longitude vs latitude 2D-vector field contour plots (set 6)
+    Longitude vs latitude polar 2D-field contour plots (set 7)
+    Month vs latitude zonal mean contour plots (set 8)
+    Longitude vs latitude DJF-JJA contour plots (set 9)
+    Annual cycle line plots of global means (set 10)
+    Miscellaneous plot types (set 11)
+    Vertical profiles at 56 raobs stations around the globe (set 12)
+    ISCCP cloud types from the ISCCP cloud simulator (set 13)
+    Plots of statisitcal significance for sets 5 and 7
+    Plots with paleoclimate coastlines using the orography field 

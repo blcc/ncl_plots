@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/blcnclplots/!svn/ver/2/mq_ncl/M/original
+END
+cal-dmobs_era40.f
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/blcnclplots/!svn/ver/2/mq_ncl/M/original/cal-dmobs_era40.f
+END
+read-era40-grb-prs.f
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/blcnclplots/!svn/ver/2/mq_ncl/M/original/read-era40-grb-prs.f
+END
+run_era40_grib
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/blcnclplots/!svn/ver/2/mq_ncl/M/original/run_era40_grib
+END
+read-era40-grb-sfc.f
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/blcnclplots/!svn/ver/2/mq_ncl/M/original/read-era40-grb-sfc.f
+END
+runprs
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/blcnclplots/!svn/ver/2/mq_ncl/M/original/runprs
+END
+sub-cape-ccu.f
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/blcnclplots/!svn/ver/2/mq_ncl/M/original/sub-cape-ccu.f
+END

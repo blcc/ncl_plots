@@ -1,0 +1,69 @@
+[contrast to C384]
+    ua : Eastward Wind
+    va : Northward Wind
+    wap : omega (=dp/dt)
+    ta : Air Temperature
+    hur : Relative Humidity
+    hus : Specific Humidity
+    pr : Precipitation
+    evspsbl : Evaporation
+
+    psl : Sea Level Pressure
+    ps : Surface Air Pressure
+    ts : Surface Temperature
+
+    clt : Total Cloud Fraction
+
+[cloud and water]
+    cct : Air Pressure at Convective Cloud Top
+    cl : Cloud Area Fraction
+    cli : Mass Fraction of Cloud Ice
+    clw : Mass Fraction of Cloud Liquid Water
+    clivi : Ice Water Path
+    clwvi : Condensed Water Path
+    hurs : Near-Surface Relative Humidity
+    huss : Near-Surface Specific Humidity
+    prc : Convective Precipitation
+    prsn : Snowfall Flux
+    prw : Water Vapor Path
+    ci : Fraction of Time Convection Occurs
+
+[pressure, wind and temperature]
+    sfcWind : Near-Surface Wind Speed
+    tas : Near-Surface Air Temperature
+    tasmax : Daily Maximum Near-Surface Air Temperature
+    tasmin : Daily Minimum Near-Surface Air Temperature
+    tauu : Surface Downward Eastward Wind Stress
+    tauv : Surface Downward Northward Wind Stress
+    uas : Eastward Near-Surface Wind
+    vas : Northward Near-Surface Wind
+    zg : Geopotential Height
+
+
+[greenhouse gas]
+    cfc113global : Global mean mole fraction of CFC-113
+    cfc11global : Global mean mole fraction of CFC-11
+    cfc12global : Global mean mole fraction of CFC-12
+    ch4global : Global Mean Mole Fraction of CH4
+    co2mass : Total Atmospheric Mass of CO2
+    hcfc22global : Global mean mole fraction of HCFC-22
+    n2oglobal : Global Mean Mole Fraction of N2O
+    tro3 : Mole Fraction of O3
+
+[heat flux and radiation]
+    hfls : Surface Upward Latent Heat Flux
+    hfss : Surface Upward Sensible Heat Flux
+    rlds : Surface Downwelling Longwave Radiation
+    rldscs : Surface Downwelling Clear-Sky Longwave Radiation
+    rlus : Surface Upwelling Longwave Radiation
+    rlut : TOA Outgoing Longwave Radiation
+    rlutcs : TOA Outgoing Clear-Sky Longwave Radiation
+    rsds : Surface Downwelling Shortwave Radiation
+    rsdscs : Surface Downwelling Clear-Sky Shortwave Radiation
+    rsdt : TOA Incident Shortwave Radiation
+    rsus : Surface Upwelling Shortwave Radiation
+    rsuscs : Surface Upwelling Clear-Sky Shortwave Radiation
+    rsut : TOA Outgoing Shortwave Radiation
+    rsutcs : TOA Outgoing Clear-Sky Shortwave Radiation
+    rtmt : Net Downward Flux at Top of Model
+
