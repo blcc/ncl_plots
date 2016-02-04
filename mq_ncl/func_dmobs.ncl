@@ -1,8 +1,9 @@
 ;; by pgchiu Jan2010
 ;; mod for nuwa Sep2013
-load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
-load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
-load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"
+
+;;load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+;;load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+;;load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"
 
 undef("myint2p")
 function myint2p(ip,ix,op,opt)

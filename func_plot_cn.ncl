@@ -1,6 +1,6 @@
-load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
-load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
-load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"
+;;load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+;;load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+;;load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"
 
 undef("plot_latlon")
 function plot_latlon(title,filename,var[*][*],ires)
@@ -60,6 +60,17 @@ begin
         delete_VarAtts(res,"plotaddcng")
         res@gsnFrame = False
         res@gsnDraw  = False
+        atts = getvaratts(res)
+        cngres = True
+        do i = 0, dimsizes(atts)-1
+            if(.not.ismissing(str_match(atts(i),"cngres")))then
+                att = str_sub_str(atts(i),"cngres","")
+                cngres@$att$ = res@$atts(i)$
+                delete_VarAtts(res,atts(i))
+                delete(att)
+            end if
+        end do
+        delete(atts)
     end if
     if(isatt(res,"plotaddcnr"))then  ;; will plot red contour
         addcnr = res@plotaddcnr   ;; should be (lat,lon)
@@ -140,6 +151,7 @@ begin
         gres@gsnDraw = False
         gres@gsnFrame = False
         gres@cnInfoLabelOn  = False
+        copy_VarAtts(cngres,gres)
         plotr = gsn_csm_contour(wks,addcng,gres)
         overlay(plot,plotr)
     end if

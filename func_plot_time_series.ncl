@@ -1,6 +1,6 @@
-load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
-load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
-load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/shea_util.ncl" ;; for drawNDCGrid()
+;;load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+;;load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+;;load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/shea_util.ncl" ;; for drawNDCGrid()
 undef("plot_mcol_bar")
 function plot_mcol_bar(wks,dd[*][*],res) ;plot multi color bar chart
 begin
@@ -328,16 +328,20 @@ begin  ;; allyrts(kind,time) , res not imply yet(need to be done)
         if(.not.isatt(res,"pmLegendDisplayMode"))then
             res@pmLegendDisplayMode    = "Always" 
         end if
-        res@pmLegendParallelPosF   = 0.10                  ; move units right
-        res@pmLegendOrthogonalPosF = -1.1 ;-0.5 ; more neg = up
+        res@pmLegendParallelPosF   =  0.82;0.80                  ; move units right
+        res@pmLegendOrthogonalPosF = -0.45
         res@pmLegendWidthF         = 0.10                  ; Change width and
         res@pmLegendHeightF        = 0.08                  ; height of legend.
+        res@pmLegendSide            = "Top"
+        res@lgJustification         = "TopLeft"
         res@lgPerimOn              = False                 ; no box around
         res@lgLabelFontHeightF     = .01                   ; change font height
         res@xyExplicitLegendLabels = allyrts&$allyrts!0$
+        res@tmXTOn = False
     
         res@trXMinF = min(allyrts&$allyrts!1$)-0.1
         res@trXMaxF = max(allyrts&$allyrts!1$)+0.1
+        copy_VarAtts(ires,res)
         if(isatt(allyrts,"ymin"))then
             res@trYMinF = allyrts@ymin
         end if
@@ -347,7 +351,7 @@ begin  ;; allyrts(kind,time) , res not imply yet(need to be done)
         if(ntsx.eq.12)then
             res@tmXBMode  = "Explicit"
             res@tmXBValues = ispan(1,12,1)
-            res@tmXBLabels = ispan(1,12,1)
+            res@tmXBLabels = (/"J","F","M","A","M","J","J","A","S","O","N","D"/)
         end if
         if(.not.isatt(res,"xyLineColors"))then
             res@xyLineColors      = (/"black","blue","green","red", "black", "RoyalBlue", "lightseagreen","Pink"/)   

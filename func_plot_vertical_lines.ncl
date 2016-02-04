@@ -1,5 +1,5 @@
-load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
-load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+;;load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+;;load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
 
 
 function create_std_xz_polygon(avgline[*],stdline[*],z[*])
