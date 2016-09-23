@@ -110,7 +110,7 @@ begin
 
     ;; CAPE at radius of maximum winds
     ppmin = min((/PMIN,1000/))
-    RP=0.622*Rgg(0)*PSL/(PSL*(0.622+Rgg(0))-Rgg(0)*PSL)
+    RP=0.622*Rgg(0)*PSL/(ppmin*(0.622+Rgg(0))-Rgg(0)*PSL)
     emf::CAPE(Tk(0),RP,ppmin ,Tk,Rgg,P,NA,N,SIG,CAPEM,TOB,IFLAG)
 
     ;; saturation CAPE at radius of maximum winds
