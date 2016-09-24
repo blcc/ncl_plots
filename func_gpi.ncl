@@ -159,7 +159,11 @@ begin
         if(ismissing(PSL(j,i)).or.ismissing(SST(j,i)))then
             continue
         end if
-        vpot(j,i) = cal_vpot(T(:,j,i),R(:,j,i),PSL(j,i),SST(j,i),Plev)
+        ibot = ind(.not.ismissing(T(:,j,i)))
+        if(any(ismissing(ibot)))then
+            continue
+        end if
+        vpot(j,i) = cal_vpot(T(ibot:,j,i),R(ibot:,j,i),PSL(j,i),SST(j,i),Plev(ibot:))
         capee(j,i) = vpot@capee
         capem(j,i) = vpot@capem
         cape_ast(j,i) = vpot@cape_ast
